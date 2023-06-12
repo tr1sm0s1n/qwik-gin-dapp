@@ -7,6 +7,8 @@ import (
 	"log"
 	"math/big"
 	"os"
+	"sync"
+	"time"
 
 	"github.com/DEMYSTIF/qwik-gin-dapp/server/helpers"
 	"github.com/DEMYSTIF/qwik-gin-dapp/server/lib"
@@ -19,6 +21,8 @@ import (
 )
 
 func main() {
+	var wg sync.WaitGroup
+	ch := make(chan int)
 	err := godotenv.Load()
 	if err != nil {
 		log.Fatal(err)
@@ -29,17 +33,26 @@ func main() {
 		log.Fatal(err)
 	}
 
-	contractAddress, transactionHash, err := deployContract(client)
+	contractAddress, trx, err := deployContract(client)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	fmt.Printf("Contract Address: %s\n", contractAddress.String())
-	fmt.Println("------------------------------------")
-	fmt.Printf("Transaction Hash: %s\n", transactionHash.Hash())
-	fmt.Println("------------------------------------")
+	wg.Add(1)
+	go checkStatus(client, trx.Hash(), &wg, ch)
 
-	helpers.UpdateEnv(contractAddress.String())
+	select {
+	case <-ch:
+		fmt.Printf("Contract Address: \x1b[32m%s\x1b[0m\n", contractAddress.String())
+		fmt.Println("-----------------")
+		fmt.Printf("Transaction Hash: \x1b[32m%s\x1b[0m\n", trx.Hash())
+		fmt.Println("-----------------")
+		helpers.UpdateEnv(contractAddress.String())
+	case <-time.After(30 * time.Second):
+		fmt.Println("\x1b[31mTimeout reached!!\x1b[0m")
+	}
+
+	wg.Wait()
 }
 
 func deployContract(client *ethclient.Client) (common.Address, *types.Transaction, error) {
@@ -83,4 +96,20 @@ func deployContract(client *ethclient.Client) (common.Address, *types.Transactio
 
 	contract, transaction, _, err := lib.DeployCert(auth, client)
 	return contract, transaction, err
+}
+
+func checkStatus(client *ethclient.Client, tHash common.Hash, wg *sync.WaitGroup, ch chan int) {
+	defer wg.Done()
+	trxReceipt, err := client.TransactionReceipt(context.Background(), tHash)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	if trxReceipt.Status == 1 {
+		ch <- 1
+		return
+	}
+
+	time.Sleep(1 * time.Second)
+	checkStatus(client, tHash, wg, ch)
 }
