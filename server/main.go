@@ -9,6 +9,7 @@ import (
 	"os"
 
 	"github.com/DEMYSTIF/qwik-gin-dapp/server/helpers"
+	"github.com/DEMYSTIF/qwik-gin-dapp/server/lib"
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/types"
@@ -80,6 +81,6 @@ func deployContract(client *ethclient.Client) (common.Address, *types.Transactio
 	auth.GasLimit = gasLimit
 	auth.GasPrice = gasPrice
 
-	contract, transaction, _, err := DeployCert(auth, client)
+	contract, transaction, _, err := lib.DeployCert(auth, client)
 	return contract, transaction, err
 }
