@@ -15,33 +15,25 @@ func UpdateEnv(contractAddress string) {
 	}
 	defer file.Close()
 
-	envContent := make(map[string]string)
-	comments := []string{}
+	envContent := []string{}
 	scanner := bufio.NewScanner(file)
 	for scanner.Scan() {
 		line := scanner.Text()
-		if strings.HasPrefix(line, "#") {
-			comments = append(comments, line)
+		if strings.HasPrefix(line, "CONTRACT_ADDRESS") {
+			modified := fmt.Sprintf("CONTRACT_ADDRESS=%s", contractAddress)
+			envContent = append(envContent, modified)
 		} else {
-			parts := strings.SplitN(line, "=", 2)
-			if len(parts) == 2 {
-				envContent[parts[0]] = parts[1]
-			}
+			envContent = append(envContent, line)
 		}
 	}
-
-	envContent["CONTRACT_ADDRESS"] = contractAddress
 
 	file.Truncate(0)
 	file.Seek(0, 0)
 	writer := bufio.NewWriter(file)
-	for _, comment := range comments {
-		fmt.Fprintln(writer, comment)
+	for _, line := range envContent {
+		fmt.Fprintln(writer, line)
 	}
-	for key, value := range envContent {
-		fmt.Fprintf(writer, "%s=%s\n", key, value)
-	}
-	writer.Flush()
 
-	fmt.Println(".env updated.")
+	writer.Flush()
+	fmt.Println("\x1b[34mDeployment details are saved to the '.env' file.\x1b[0m")
 }
