@@ -100,16 +100,24 @@ func deployContract(client *ethclient.Client) (common.Address, *types.Transactio
 
 func checkStatus(client *ethclient.Client, tHash common.Hash, wg *sync.WaitGroup, ch chan int) {
 	defer wg.Done()
+	for {
 	trxReceipt, err := client.TransactionReceipt(context.Background(), tHash)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	if trxReceipt.Status == 1 {
+		if trxReceipt.Status == 2 {
 		ch <- 1
 		return
 	}
 
+		select {
+		case <-ch:
+			fmt.Println("\x1b[31mTransaction failed to commit!!\x1b[0m")
+			return
+		default:
 	time.Sleep(1 * time.Second)
-	checkStatus(client, tHash, wg, ch)
+		}
+	}
+}
 }
