@@ -46,16 +46,16 @@ func main() {
 
 	select {
 	case <-ch:
-		fmt.Printf("1\rTransaction committed!!")
-		fmt.Printf("\n-----------------------\n")
-		fmt.Printf("Contract Address: \x1b[32m%s\x1b[0m\n", contractAddress.String())
+		fmt.Printf("1\rTransaction has been committed!!")
+		fmt.Println("\n-----------------------")
+		fmt.Printf("Contract Address: \033[32m%s\033[0m\n", contractAddress.String())
 		fmt.Println("-----------------")
-		fmt.Printf("Transaction Hash: \x1b[32m%s\x1b[0m\n", trx.Hash())
+		fmt.Printf("Transaction Hash: \033[32m%s\033[0m\n", trx.Hash())
 		fmt.Println("-----------------")
 		helpers.UpdateEnv(contractAddress.String())
 		done <- true
-	case <-time.After(30 * time.Second):
-		fmt.Println("1\r\x1b[31mTimeout reached!!\x1b[0m")
+	case <-time.After(3 * time.Second):
+		fmt.Println("1\r\033[31mSorry, timeout has reached!!\033[0m")
 		ch <- 1
 		done <- true
 	}
@@ -121,7 +121,7 @@ func checkStatus(client *ethclient.Client, tHash common.Hash, wg *sync.WaitGroup
 
 		select {
 		case <-ch:
-			fmt.Println("\x1b[31mTransaction failed to commit!!\x1b[0m")
+			fmt.Println("\033[31mUnable to fetch the transaction receipt.\033[0m\033[?25h")
 			return
 		default:
 			time.Sleep(1 * time.Second)
@@ -130,14 +130,14 @@ func checkStatus(client *ethclient.Client, tHash common.Hash, wg *sync.WaitGroup
 }
 
 func printLoading(done chan bool) {
-	spinner := []string{"|", "/", "-", "\\"}
+	spinner := []string{"◳", "◲", "◱", "◰"}
 	i := 0
 	for {
 		select {
 		case <-done:
 			return
 		default:
-			fmt.Printf("\rLoading... %s", spinner[i])
+			fmt.Printf("\r\033[34mDeploying Contract... %s\033[0m\033[?25l", spinner[i])
 			i = (i + 1) % len(spinner)
 			time.Sleep(100 * time.Millisecond)
 		}

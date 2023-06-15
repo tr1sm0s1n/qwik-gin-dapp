@@ -10,7 +10,7 @@ import (
 func UpdateEnv(contractAddress string) {
 	file, err := os.OpenFile(".env", os.O_RDWR|os.O_CREATE, 0644)
 	if err != nil {
-		fmt.Printf("Failed to open .env file: %s\n", err.Error())
+		fmt.Printf("Failed to open .env file: %s\n\033[?25h", err.Error())
 		return
 	}
 	defer file.Close()
@@ -35,5 +35,5 @@ func UpdateEnv(contractAddress string) {
 	}
 
 	writer.Flush()
-	fmt.Println("\x1b[34mDeployment details are saved to the '.env' file.\x1b[0m")
+	fmt.Println("\033[35mDeployment details are saved to the '.env' file.\033[0m\033[?25h")
 }
