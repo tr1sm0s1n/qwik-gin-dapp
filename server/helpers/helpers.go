@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 	"strings"
+	"time"
 )
 
 func UpdateEnv(contractAddress string) {
@@ -36,4 +37,19 @@ func UpdateEnv(contractAddress string) {
 
 	writer.Flush()
 	fmt.Println("\033[35mDeployment details are saved to the '.env' file.\033[0m\033[?25h")
+}
+
+func Loading(done chan bool) {
+	spinner := []string{"◳", "◲", "◱", "◰"}
+	i := 0
+	for {
+		select {
+		case <-done:
+			return
+		default:
+			fmt.Printf("\r\033[34mDeploying Contract... %s\033[0m\033[?25l", spinner[i])
+			i = (i + 1) % len(spinner)
+			time.Sleep(100 * time.Millisecond)
+		}
+	}
 }
