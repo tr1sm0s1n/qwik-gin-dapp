@@ -1,10 +1,15 @@
-import { component$, $, useStore } from '@builder.io/qwik';
+import { component$, $, useStore, useContext } from '@builder.io/qwik';
+import { Link, useNavigate } from '@builder.io/qwik-city';
 import '../icons/metamask.svg';
+import { AuthContext } from '~/routes/layout';
 
 export const NavBar = component$(() => {
+  const authorized = useContext(AuthContext);
+  const nav = useNavigate();
   const connection = useStore({
     account: '',
     status: false,
+    admin: false,
   });
 
   const connectToMetaMask = $(async () => {
@@ -13,18 +18,27 @@ export const NavBar = component$(() => {
       const wallet = await ethereum.request({ method: 'eth_requestAccounts' });
       connection.account = wallet[0];
       connection.status = true;
+      connection.admin = connection.account === import.meta.env.PUBLIC_ADMIN;
+
+      if (connection.admin) {
+        console.log('Welcome Admin');
+        authorized.value = true;
+        await nav('/issue');
+      } else {
+        console.log('Welcome Guest');
+      }
     }
   });
 
   return (
     <>
       <nav class="flex items-center justify-between flex-wrap bg-rose-800 p-6">
-        <div class="flex items-center flex-shrink-0 text-white mr-6">
+        <Link href="/" class="flex items-center flex-shrink-0 text-white mr-6">
           <img class="h-8 w-8 mx-2" src="/logo.svg" alt="logo" />
           <span class="font-semibold text-xl tracking-tight">
             Certificate DApp
           </span>
-        </div>
+        </Link>
         <div class="flex justify-end w-auto">
           <div>
             <button
