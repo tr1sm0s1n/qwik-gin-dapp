@@ -43,7 +43,7 @@ export default component$(() => {
 });
 
 export const head: DocumentHead = {
-  title: 'Welcome to Qwik',
+  title: 'Home | Certificate DApp',
   meta: [
     {
       name: 'description',
