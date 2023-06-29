@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"strconv"
 	"strings"
 	"time"
 )
@@ -37,6 +38,11 @@ func UpdateEnv(contractAddress string) {
 
 	writer.Flush()
 	fmt.Println("\033[35mDeployment details are saved to the '.env' file.\033[0m\033[?25h")
+}
+
+func ParseInt(input string) (int64, error) {
+	output, err := strconv.ParseInt(input, 10, 64)
+	return output, err
 }
 
 func Loading(done chan bool) {

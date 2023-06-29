@@ -3,8 +3,8 @@ package controllers
 import (
 	"log"
 	"net/http"
-	"strconv"
 
+	"github.com/DEMYSTIF/qwik-gin-dapp/server/helpers"
 	"github.com/DEMYSTIF/qwik-gin-dapp/server/interfaces"
 	"github.com/DEMYSTIF/qwik-gin-dapp/server/lib"
 	"github.com/DEMYSTIF/qwik-gin-dapp/server/services"
@@ -21,7 +21,7 @@ func InfoController(ctx *gin.Context, client *ethclient.Client) {
 func IssueController(ctx *gin.Context, client *ethclient.Client, instance *lib.Cert) {
 	var newCertificate interfaces.InputCertificate
 
-	if err := ctx.ShouldBind(&newCertificate); err != nil {
+	if err := ctx.ShouldBindJSON(&newCertificate); err != nil {
 		ctx.AbortWithStatusJSON(400, gin.H{"message": "Bad request"})
 		return
 	}
@@ -38,7 +38,7 @@ func IssueController(ctx *gin.Context, client *ethclient.Client, instance *lib.C
 
 func FetchController(ctx *gin.Context, instance *lib.Cert) {
 	param := ctx.Query("id")
-	id, err := strconv.ParseInt(param, 10, 64)
+	id, err := helpers.ParseInt(param)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -50,6 +50,6 @@ func FetchController(ctx *gin.Context, instance *lib.Cert) {
 	}
 
 	ctx.IndentedJSON(http.StatusOK, gin.H{
-		"title": "Certificate DApp", "id": id, "name": result.Name, "course": result.Course, "grade": result.Grade, "date": result.Date,
+		"id": id, "name": result.Name, "course": result.Course, "grade": result.Grade, "date": result.Date,
 	})
 }
