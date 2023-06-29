@@ -1,11 +1,11 @@
 package interfaces
 
 type InputCertificate struct {
-	ID     int    `json:"id"`
-	Name   string `json:"name"`
-	Course string `json:"course"`
-	Grade  string `json:"grade"`
-	Date   string `json:"date"`
+	ID     string `json:"candidateID" binding:"required"`
+	Name   string `json:"candidateName" binding:"required"`
+	Course string `json:"courseName" binding:"required"`
+	Grade  string `json:"courseGrade" binding:"required"`
+	Date   string `json:"courseDate" binding:"required"`
 }
 
 type ReturnCertificate struct {

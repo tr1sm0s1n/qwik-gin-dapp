@@ -5,6 +5,7 @@ import (
 	"log"
 	"math/big"
 
+	"github.com/DEMYSTIF/qwik-gin-dapp/server/helpers"
 	"github.com/DEMYSTIF/qwik-gin-dapp/server/interfaces"
 	"github.com/DEMYSTIF/qwik-gin-dapp/server/lib"
 	"github.com/DEMYSTIF/qwik-gin-dapp/server/middlewares"
@@ -34,7 +35,12 @@ func InfoService(client *ethclient.Client) (*big.Int, *big.Int, uint64) {
 
 func IssueService(client *ethclient.Client, instance *lib.Cert, newCertificate interfaces.InputCertificate) (*types.Transaction, error) {
 	auth := middlewares.AuthGenerator(client)
-	trx, err := instance.Issue(auth, big.NewInt(int64(newCertificate.ID)), newCertificate.Name, newCertificate.Course, newCertificate.Grade, newCertificate.Date)
+	intID, err := helpers.ParseInt(newCertificate.ID)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	trx, err := instance.Issue(auth, big.NewInt(int64(intID)), newCertificate.Name, newCertificate.Course, newCertificate.Grade, newCertificate.Date)
 
 	return trx, err
 }
