@@ -4,7 +4,7 @@ import { AuthContext } from '../layout';
 
 export const useIssue = routeAction$(async (candidate) => {
   console.log(candidate);
-  const res = await fetch('http://127.0.0.1:8080/issue', {
+  const res = await fetch(`${import.meta.env.PUBLIC_API}/issue`, {
     method: 'POST',
     body: JSON.stringify(candidate),
     headers: {
