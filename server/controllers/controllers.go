@@ -22,7 +22,7 @@ func IssueController(ctx *gin.Context, client *ethclient.Client, instance *lib.C
 	var newCertificate interfaces.InputCertificate
 
 	if err := ctx.ShouldBindJSON(&newCertificate); err != nil {
-		ctx.AbortWithStatusJSON(400, gin.H{"message": "Bad request"})
+		ctx.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"message": "Bad request"})
 		return
 	}
 
@@ -45,7 +45,13 @@ func FetchController(ctx *gin.Context, instance *lib.Cert) {
 
 	result, err := services.FetchService(instance, id)
 	if err != nil {
-		ctx.AbortWithStatusJSON(400, gin.H{"message": "Bad request"})
+		ctx.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"message": "Bad request"})
+		return
+	}
+
+	emptyResult := interfaces.ReturnCertificate{}
+	if result == emptyResult {
+		ctx.AbortWithStatusJSON(http.StatusNotFound, gin.H{"message": "Not found"})
 		return
 	}
 
