@@ -14,8 +14,7 @@ export const useIssue = routeAction$(async (candidate) => {
   console.log(await res.json());
 
   return {
-    status: res.status,
-    candidate,
+    success: res.status === 201,
   };
 });
 
@@ -26,7 +25,7 @@ export default component$(() => {
   return authorized.value ? (
     <section class="flex justify-center m-8">
       <div class="w-full max-w-4xl p-4 bg-white border border-gray-200 rounded-lg shadow">
-        {!action.value?.status ? (
+        {!action.value?.success ? (
           <>
             <h3 class="text-2xl font-medium text-gray-900 text-center mb-4">
               Issue Certificate
@@ -135,11 +134,7 @@ export default component$(() => {
             </Form>
           </>
         ) : (
-          <>
-            <p class="text-xl text-green-700">
-              Certificate issued successfully!
-            </p>
-          </>
+          <p class="text-xl text-green-700">Certificate issued successfully!</p>
         )}
       </div>
     </section>
