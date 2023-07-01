@@ -1,6 +1,5 @@
 import { component$, $, useStore, useContext } from '@builder.io/qwik';
 import { Link, useNavigate } from '@builder.io/qwik-city';
-import '../icons/metamask.svg';
 import { AuthContext } from '~/routes/layout';
 
 export const NavBar = component$(() => {
