@@ -13,7 +13,7 @@ import (
 )
 
 func AuthGenerator(client *ethclient.Client) *bind.TransactOpts {
-	privateKey, err := crypto.HexToECDSA(os.Getenv("PRIVATE_KEY"))
+	privateKey, err := crypto.HexToECDSA(os.Getenv("PRIVATE_KEY")[2:])
 	if err != nil {
 		log.Fatal(err)
 	}
