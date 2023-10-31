@@ -4,15 +4,13 @@ Fast and performance-efficient DApp with Qwik and TypeScript as frontend and Gin
 
 ## 🛠 Built With
 
-<div align="left">
-<a href="https://nodejs.org/en/" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/DEMYSTIF/DEMYSTIF/main/assets/icons/nodejs.svg" width="36" height="36" alt="NodeJS" /></a>
-<a href="https://qwik.builder.io/docs/" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/DEMYSTIF/DEMYSTIF/main/assets/icons/qwik.svg" width="36" height="36" alt="Qwik" /></a>
-<a href="https://go.dev/" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/DEMYSTIF/DEMYSTIF/main/assets/icons/go.svg" width="36" height="36" alt="Go" /></a>
-<a href="https://gin-gonic.com/docs/" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/DEMYSTIF/DEMYSTIF/main/assets/icons/gin.svg" width="36" height="36" alt="Gin" /></a>
-<a href="https://soliditylang.org/" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/DEMYSTIF/DEMYSTIF/main/assets/icons/solidity.svg" width="36" height="36" alt="Solidity" /></a>
-<a href="https://metamask.io/" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/DEMYSTIF/DEMYSTIF/main/assets/icons/metamask.svg" width="36" height="36" alt="MetaMask" /></a>
-<a href="https://tailwindcss.com/" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/DEMYSTIF/DEMYSTIF/main/assets/icons/tailwindcss.svg" width="36" height="36" alt="TailwindCSS" /></a>
-</div>
+[![Node.js](https://img.shields.io/badge/node.js-DCDCDC?style=for-the-badge&logo=node.js)](https://nodejs.org/en/)
+[![Qwik](https://img.shields.io/badge/qwik-DCDCDC?style=for-the-badge&logo=typescript)](https://qwik.builder.io)
+[![Go](https://img.shields.io/badge/go-2F4F4F?style=for-the-badge&logo=go)](https://go.dev/)
+[![Gin](https://img.shields.io/badge/gin-2F4F4F?style=for-the-badge&logo=go)](https://gin-gonic.com/)
+[![Solidity](https://img.shields.io/badge/solidity-808000?style=for-the-badge&logo=solidity)](https://soliditylang.org/)
+[![MetaMask](https://img.shields.io/badge/metamask-808000?style=for-the-badge&logo=ethereum)](https://metamask.io/)
+[![TailwindCSS](https://img.shields.io/badge/tailwindcss-008080?style=for-the-badge&logo=tailwindcss)](https://tailwindcss.com/)
 
 ## ⚙️ Run Locally
 
