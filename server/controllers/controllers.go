@@ -4,12 +4,12 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/DEMYSTIF/qwik-gin-dapp/server/helpers"
-	"github.com/DEMYSTIF/qwik-gin-dapp/server/interfaces"
-	"github.com/DEMYSTIF/qwik-gin-dapp/server/lib"
-	"github.com/DEMYSTIF/qwik-gin-dapp/server/services"
 	"github.com/ethereum/go-ethereum/ethclient"
 	"github.com/gin-gonic/gin"
+	"github.com/tr1sm0s1n/qwik-gin-dapp/server/helpers"
+	"github.com/tr1sm0s1n/qwik-gin-dapp/server/interfaces"
+	"github.com/tr1sm0s1n/qwik-gin-dapp/server/lib"
+	"github.com/tr1sm0s1n/qwik-gin-dapp/server/services"
 )
 
 func InfoController(ctx *gin.Context, client *ethclient.Client) {

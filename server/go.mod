@@ -1,4 +1,4 @@
-module github.com/DEMYSTIF/qwik-gin-dapp/server
+module github.com/tr1sm0s1n/qwik-gin-dapp/server
 
 go 1.20
 

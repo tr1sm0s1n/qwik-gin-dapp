@@ -7,13 +7,13 @@ import (
 	"sync"
 	"time"
 
-	"github.com/DEMYSTIF/qwik-gin-dapp/server/helpers"
-	"github.com/DEMYSTIF/qwik-gin-dapp/server/lib"
-	"github.com/DEMYSTIF/qwik-gin-dapp/server/middlewares"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/ethclient"
 	"github.com/joho/godotenv"
+	"github.com/tr1sm0s1n/qwik-gin-dapp/server/helpers"
+	"github.com/tr1sm0s1n/qwik-gin-dapp/server/lib"
+	"github.com/tr1sm0s1n/qwik-gin-dapp/server/middlewares"
 )
 
 func main() {

@@ -5,13 +5,13 @@ import (
 	"log"
 	"math/big"
 
-	"github.com/DEMYSTIF/qwik-gin-dapp/server/helpers"
-	"github.com/DEMYSTIF/qwik-gin-dapp/server/interfaces"
-	"github.com/DEMYSTIF/qwik-gin-dapp/server/lib"
-	"github.com/DEMYSTIF/qwik-gin-dapp/server/middlewares"
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/ethclient"
+	"github.com/tr1sm0s1n/qwik-gin-dapp/server/helpers"
+	"github.com/tr1sm0s1n/qwik-gin-dapp/server/interfaces"
+	"github.com/tr1sm0s1n/qwik-gin-dapp/server/lib"
+	"github.com/tr1sm0s1n/qwik-gin-dapp/server/middlewares"
 )
 
 func InfoService(client *ethclient.Client) (*big.Int, *big.Int, uint64) {

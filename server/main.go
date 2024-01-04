@@ -5,12 +5,12 @@ import (
 	"log"
 	"os"
 
-	"github.com/DEMYSTIF/qwik-gin-dapp/server/controllers"
-	"github.com/DEMYSTIF/qwik-gin-dapp/server/lib"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/ethclient"
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
+	"github.com/tr1sm0s1n/qwik-gin-dapp/server/controllers"
+	"github.com/tr1sm0s1n/qwik-gin-dapp/server/lib"
 )
 
 func main() {
