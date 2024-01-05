@@ -15,9 +15,18 @@ export const NavBar = component$(() => {
     const ethereum = window.ethereum;
     if (ethereum) {
       const wallet = await ethereum.request({ method: 'eth_requestAccounts' });
+      const sign = await window.ethereum.request({
+        method: 'personal_sign',
+        params: [
+          '0x57656c636f6d6520746f20436572746966696361746520444170702e204b696e646c79207369676e2074686973206d65737361676520746f2070726f636565642e20546869732070726f63656475726520646f6573206e6f74207265717569726520616e792045544820746f2070726f636573732e',
+          wallet[0],
+        ],
+      });
+      console.log(sign);
+
       connection.account = wallet[0];
       connection.status = true;
-      connection.admin = connection.account === import.meta.env.PUBLIC_ADMIN;
+      connection.admin = sign === import.meta.env.PUBLIC_ADMIN_SIGN;
 
       if (connection.admin) {
         console.log('Welcome Admin');
