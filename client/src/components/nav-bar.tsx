@@ -1,5 +1,7 @@
 import { component$, $, useStore, useContext } from '@builder.io/qwik';
 import { Link, useNavigate } from '@builder.io/qwik-city';
+import ImgLogo from '~/media/logo.svg?jsx';
+import ImgMetamask from '~/media/metamask.svg?jsx';
 import { AuthContext } from '~/routes/layout';
 
 export const NavBar = component$(() => {
@@ -42,7 +44,9 @@ export const NavBar = component$(() => {
     <>
       <nav class="flex items-center justify-between flex-wrap bg-rose-800 p-6">
         <Link href="/" class="flex items-center flex-shrink-0 text-white mr-6">
-          <img class="h-8 w-8 mx-2" src="/logo.svg" alt="logo" />
+          <div class="h-8 w-8 mx-2">
+            <ImgLogo />
+          </div>
           <span class="font-semibold text-xl tracking-tight">
             Certificate DApp
           </span>
@@ -55,11 +59,9 @@ export const NavBar = component$(() => {
             >
               {connection.status ? (
                 <>
-                  <img
-                    class="h-6 w-6 mr-2"
-                    src="/metamask.svg"
-                    alt="metamask"
-                  />
+                  <div class="h-6 w-6">
+                    <ImgMetamask />
+                  </div>
                   <span>
                     {connection.account.slice(0, 5)}...
                     {connection.account.slice(-4)}
@@ -68,11 +70,9 @@ export const NavBar = component$(() => {
               ) : (
                 <>
                   <span>Connect</span>
-                  <img
-                    class="h-6 w-6 ml-2"
-                    src="/metamask.svg"
-                    alt="metamask"
-                  />
+                  <div class="h-6 w-6">
+                    <ImgMetamask />
+                  </div>
                 </>
               )}
             </button>
