@@ -6,6 +6,7 @@ import (
 	"os"
 	"strconv"
 	"strings"
+	"sync"
 	"time"
 )
 
@@ -45,7 +46,8 @@ func ParseInt(input string) (int64, error) {
 	return output, err
 }
 
-func Loading(done chan bool) {
+func Loading(wg *sync.WaitGroup, done chan bool) {
+	defer wg.Done()
 	spinner := []string{"◳", "◲", "◱", "◰"}
 	i := 0
 	for {
