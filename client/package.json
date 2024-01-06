@@ -37,5 +37,6 @@
     "undici": "5.22.1",
     "vite": "4.3.9",
     "vite-tsconfig-paths": "4.2.0"
-  }
+  },
+  "type": "module"
 }
