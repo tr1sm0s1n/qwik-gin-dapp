@@ -4,14 +4,14 @@ Fast and performance-efficient DApp with Qwik and TypeScript as frontend and Gin
 
 ## 🛠 Built With
 
-[![Node.js](https://img.shields.io/badge/node.js-olivedrab?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org/en)
-[![Qwik](https://img.shields.io/badge/qwik-olivedrab?style=for-the-badge&logo=node.js&logoColor=white)](https://qwik.builder.io)
-[![Go](https://img.shields.io/badge/go-dodgerblue?style=for-the-badge&logo=go&logoColor=white)](https://go.dev/)
-[![Gin](https://img.shields.io/badge/gin-dodgerblue?style=for-the-badge&logo=go&logoColor=white)](https://gin-gonic.com/)
-[![Solidity](https://img.shields.io/badge/solidity-sienna?style=for-the-badge&logo=solidity&logoColor=white)](https://soliditylang.org/)
-[![Geth](https://img.shields.io/badge/geth-darkslategray?style=for-the-badge&logo=ethereum&logoColor=white)](https://geth.ethereum.org/)
-[![MetaMask](https://img.shields.io/badge/metamask-darkslategray?style=for-the-badge&logo=ethereum&logoColor=white)](https://metamask.io/)
-[![TailwindCSS](https://img.shields.io/badge/tailwindcss-indigo?style=for-the-badge&logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
+[![Node.js Badge](https://img.shields.io/badge/Node.js-393?logo=nodedotjs&logoColor=fff&style=for-the-badge)](https://nodejs.org/en)
+[![Qwik Badge](https://img.shields.io/badge/Qwik-3178C6?logo=typescript&logoColor=fff&style=for-the-badge)](https://qwik.builder.io)
+[![Go Badge](https://img.shields.io/badge/Go-00ADD8?logo=go&logoColor=fff&style=for-the-badge)](https://go.dev/)
+[![Gin Badge](https://img.shields.io/badge/Gin-008ECF?logo=gin&logoColor=fff&style=for-the-badge)](https://gin-gonic.com/)
+[![Solidity Badge](https://img.shields.io/badge/Solidity-363636?logo=solidity&logoColor=fff&style=for-the-badge)](https://soliditylang.org/)
+[![Geth Badge](https://img.shields.io/badge/Geth-3C3C3D?logo=ethereum&logoColor=fff&style=for-the-badge)](https://geth.ethereum.org/)
+[![MetaMask Badge](https://img.shields.io/badge/MetaMask-3C3C3D?logo=ethereum&logoColor=fff&style=for-the-badge)](https://metamask.io/)
+[![Tailwind CSS Badge](https://img.shields.io/badge/Tailwind%20CSS-06B6D4?logo=tailwindcss&logoColor=fff&style=for-the-badge)](https://tailwindcss.com/)
 
 ## ⚙️ Run Locally
 
