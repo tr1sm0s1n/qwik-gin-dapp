@@ -3,7 +3,7 @@ module github.com/tr1sm0s1n/qwik-gin-dapp/server
 go 1.20
 
 require (
-	github.com/ethereum/go-ethereum v1.13.14
+	github.com/ethereum/go-ethereum v1.13.15
 	github.com/gin-gonic/gin v1.9.1
 	github.com/joho/godotenv v1.5.1
 )
