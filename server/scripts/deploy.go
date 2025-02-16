@@ -77,7 +77,7 @@ func checkStatus(client *ethclient.Client, tHash common.Hash, wg *sync.WaitGroup
 			if err != nil {
 				continue
 			}
-	
+
 			if trxReceipt.Status == 1 {
 				ch <- 1
 				return
