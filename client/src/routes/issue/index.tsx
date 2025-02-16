@@ -1,26 +1,26 @@
-import { component$, useContext } from '@builder.io/qwik';
-import { Form, type DocumentHead, routeAction$ } from '@builder.io/qwik-city';
-import { AuthContext } from '../layout';
+import { component$, useContext } from '@builder.io/qwik'
+import { Form, type DocumentHead, routeAction$ } from '@builder.io/qwik-city'
+import { AuthContext } from '../layout'
 
 export const useIssue = routeAction$(async (candidate) => {
-  console.log(candidate);
+  console.log(candidate)
   const res = await fetch(`${import.meta.env.PUBLIC_API}/issue`, {
     method: 'POST',
     body: JSON.stringify(candidate),
     headers: {
       'Content-Type': 'application/json',
     },
-  });
-  console.log(await res.json());
+  })
+  console.log(await res.json())
 
   return {
     success: res.status === 201,
-  };
-});
+  }
+})
 
 export default component$(() => {
-  const authorized = useContext(AuthContext);
-  const action = useIssue();
+  const authorized = useContext(AuthContext)
+  const action = useIssue()
 
   return authorized.value ? (
     <section class="flex justify-center m-8">
@@ -138,8 +138,8 @@ export default component$(() => {
         )}
       </div>
     </section>
-  ) : null;
-});
+  ) : null
+})
 
 export const head: DocumentHead = {
   title: 'Issue | Certificate DApp',
@@ -149,4 +149,4 @@ export const head: DocumentHead = {
       content: 'Qwik site description',
     },
   ],
-};
+}

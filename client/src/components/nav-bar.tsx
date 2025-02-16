@@ -1,44 +1,44 @@
-import { component$, $, useStore, useContext } from '@builder.io/qwik';
-import { Link, useNavigate } from '@builder.io/qwik-city';
-import ImgLogo from '~/media/logo.svg?jsx';
-import ImgMetamask from '~/media/metamask.svg?jsx';
-import { AuthContext } from '~/routes/layout';
+import { component$, $, useStore, useContext } from '@builder.io/qwik'
+import { Link, useNavigate } from '@builder.io/qwik-city'
+import ImgLogo from '~/media/logo.svg?jsx'
+import ImgMetamask from '~/media/metamask.svg?jsx'
+import { AuthContext } from '~/routes/layout'
 
 export const NavBar = component$(() => {
-  const authorized = useContext(AuthContext);
-  const nav = useNavigate();
+  const authorized = useContext(AuthContext)
+  const nav = useNavigate()
   const connection = useStore({
     account: '',
     status: false,
     admin: false,
-  });
+  })
 
   const connectToMetaMask = $(async () => {
-    const ethereum = window.ethereum;
+    const ethereum = window.ethereum
     if (ethereum) {
-      const wallet = await ethereum.request({ method: 'eth_requestAccounts' });
+      const wallet = await ethereum.request({ method: 'eth_requestAccounts' })
       const sign = await window.ethereum.request({
         method: 'personal_sign',
         params: [
           '0x57656c636f6d6520746f20436572746966696361746520444170702e204b696e646c79207369676e2074686973206d65737361676520746f2070726f636565642e20546869732070726f63656475726520646f6573206e6f74207265717569726520616e792045544820746f2070726f636573732e',
           wallet[0],
         ],
-      });
-      console.log(sign);
+      })
+      console.log(sign)
 
-      connection.account = wallet[0];
-      connection.status = true;
-      connection.admin = sign === import.meta.env.PUBLIC_ADMIN_SIGN;
+      connection.account = wallet[0]
+      connection.status = true
+      connection.admin = sign === import.meta.env.PUBLIC_ADMIN_SIGN
 
       if (connection.admin) {
-        console.log('Welcome Admin');
-        authorized.value = true;
-        await nav('/issue');
+        console.log('Welcome Admin')
+        authorized.value = true
+        await nav('/issue')
       } else {
-        console.log('Welcome Guest');
+        console.log('Welcome Guest')
       }
     }
-  });
+  })
 
   return (
     <>
@@ -80,5 +80,5 @@ export const NavBar = component$(() => {
         </div>
       </nav>
     </>
-  );
-});
+  )
+})

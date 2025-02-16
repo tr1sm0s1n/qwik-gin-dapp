@@ -1,28 +1,28 @@
-import { component$ } from '@builder.io/qwik';
-import { Form, type DocumentHead, routeAction$ } from '@builder.io/qwik-city';
+import { component$ } from '@builder.io/qwik'
+import { Form, type DocumentHead, routeAction$ } from '@builder.io/qwik-city'
 
 type Certificate = {
-  id: number;
-  name: string;
-  course: string;
-  date: string;
-  grade: string;
-};
+  id: number
+  name: string
+  course: string
+  date: string
+  grade: string
+}
 
 export const useFetch = routeAction$(async (input) => {
   const res = await fetch(
     `${import.meta.env.PUBLIC_API}/fetch?id=${input.certificateID}`
-  );
-  const certData: Certificate = await res.json();
+  )
+  const certData: Certificate = await res.json()
 
   return {
     success: res.status === 200,
     data: certData,
-  };
-});
+  }
+})
 
 export default component$(() => {
-  const action = useFetch();
+  const action = useFetch()
 
   return (
     <>
@@ -93,8 +93,8 @@ export default component$(() => {
         </section>
       )}
     </>
-  );
-});
+  )
+})
 
 export const head: DocumentHead = {
   title: 'Home | Certificate DApp',
@@ -104,4 +104,4 @@ export const head: DocumentHead = {
       content: 'Qwik site description',
     },
   ],
-};
+}
