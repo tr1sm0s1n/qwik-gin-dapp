@@ -23,7 +23,7 @@ func main() {
 	printContract := fmt.Sprintf("Contract: %s", contract)
 	fmt.Println(printContract)
 	contractAddress := common.HexToAddress(contract)
-	client, err := ethclient.Dial("http://127.0.0.1:8545")
+	client, err := ethclient.Dial(os.Getenv("RPC_URL"))
 	if err != nil {
 		log.Fatal(err)
 	}

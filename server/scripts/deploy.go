@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"log"
+	"os"
 	"sync"
 	"time"
 
@@ -25,7 +26,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	client, err := ethclient.Dial("http://127.0.0.1:8545")
+	client, err := ethclient.Dial(os.Getenv("RPC_URL"))
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -78,7 +79,7 @@ func checkStatus(client *ethclient.Client, tHash common.Hash, wg *sync.WaitGroup
 				continue
 			}
 
-			if trxReceipt.Status == 1 {
+			if trxReceipt.Status == types.ReceiptStatusSuccessful {
 				ch <- 1
 				return
 			}
