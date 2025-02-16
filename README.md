@@ -68,7 +68,7 @@ Use air for live reload (Optional):
 
 ```bash
 # install air
-go install github.com/cosmtrek/air@latest
+go install github.com/air-verse/air@latest
 # start air
 air
 ```
