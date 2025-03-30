@@ -4,6 +4,7 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/ethereum/go-ethereum/accounts/abi/bind/v2"
 	"github.com/ethereum/go-ethereum/ethclient"
 	"github.com/gin-gonic/gin"
 	"github.com/tr1sm0s1n/qwik-gin-dapp/server/helpers"
@@ -18,7 +19,7 @@ func InfoController(ctx *gin.Context, client *ethclient.Client) {
 	ctx.IndentedJSON(http.StatusOK, gin.H{"net_version": networkID, "eth_chainId": chainID, "eth_blockNumber": latestBlock})
 }
 
-func IssueController(ctx *gin.Context, client *ethclient.Client, instance *lib.Cert) {
+func IssueController(ctx *gin.Context, client *ethclient.Client, instance *bind.BoundContract) {
 	var newCertificate interfaces.InputCertificate
 
 	if err := ctx.ShouldBindJSON(&newCertificate); err != nil {
@@ -36,7 +37,7 @@ func IssueController(ctx *gin.Context, client *ethclient.Client, instance *lib.C
 	})
 }
 
-func FetchController(ctx *gin.Context, instance *lib.Cert) {
+func FetchController(ctx *gin.Context, instance *bind.BoundContract) {
 	param := ctx.Query("id")
 	id, err := helpers.ParseInt(param)
 	if err != nil {
@@ -49,7 +50,7 @@ func FetchController(ctx *gin.Context, instance *lib.Cert) {
 		return
 	}
 
-	emptyResult := interfaces.ReturnCertificate{}
+	emptyResult := lib.CertificatesOutput{}
 	if result == emptyResult {
 		ctx.AbortWithStatusJSON(http.StatusNotFound, gin.H{"message": "Not found"})
 		return
