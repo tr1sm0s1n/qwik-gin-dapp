@@ -7,10 +7,3 @@ type InputCertificate struct {
 	Grade  string `json:"courseGrade" binding:"required"`
 	Date   string `json:"courseDate" binding:"required"`
 }
-
-type ReturnCertificate struct {
-	Name   string
-	Course string
-	Grade  string
-	Date   string
-}
