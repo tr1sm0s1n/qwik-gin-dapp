@@ -30,12 +30,11 @@ Go to the '**server**' directory:
 cd server
 ```
 
-Create a '**build**' directory and add abi and bytecode inside:
+Add/update abi and bytecode inside the '**lib**' directory:
 
 ```bash
-mkdir build
-touch build/Cert.abi
-touch build/Cert.bin
+touch lib/Cert.json
+touch lib/Cert.bin
 ```
 
 Install abigen:
@@ -47,7 +46,7 @@ go install github.com/ethereum/go-ethereum/cmd/abigen@latest
 Generate Go binding for contract:
 
 ```bash
-abigen --abi build/Cert.abi --bin build/Cert.bin --pkg lib --type Cert --out lib/Cert.go
+abigen --v2 --abi lib/Cert.json --bin lib/Cert.bin --pkg lib --type Cert --out lib/Cert.go
 ```
 
 Run a simulated blockchain on port **8545**, and add a private key to the '**.env**' file inside '**server**'.

@@ -28,10 +28,8 @@ func main() {
 		log.Fatal(err)
 	}
 
-	instance, err := lib.NewCert(contractAddress, client)
-	if err != nil {
-		log.Fatal(err)
-	}
+	cert := lib.NewCert()
+	instance := cert.Instance(client, contractAddress)
 
 	router := gin.Default()
 	router.POST("/issue", func(ctx *gin.Context) {

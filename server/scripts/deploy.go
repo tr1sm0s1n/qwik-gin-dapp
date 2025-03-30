@@ -8,6 +8,7 @@ import (
 	"sync"
 	"time"
 
+	"github.com/ethereum/go-ethereum/accounts/abi/bind/v2"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/ethclient"
@@ -61,8 +62,15 @@ func main() {
 
 func deployContract(client *ethclient.Client) (common.Address, *types.Transaction, error) {
 	auth := middlewares.AuthGenerator(client)
-	contract, transaction, _, err := lib.DeployCert(auth, client)
-	return contract, transaction, err
+	result, err := bind.LinkAndDeploy(
+		&bind.DeploymentParams{
+			Contracts: []*bind.MetaData{&lib.CertMetaData},
+		},
+		bind.DefaultDeployer(auth, client))
+	if err != nil {
+		return common.Address{}, nil, err
+	}
+	return result.Addresses[lib.CertMetaData.ID], result.Txs[lib.CertMetaData.ID], err
 }
 
 func checkStatus(client *ethclient.Client, tHash common.Hash, wg *sync.WaitGroup, ch chan int) {

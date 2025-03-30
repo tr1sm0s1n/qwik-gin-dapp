@@ -5,7 +5,7 @@ import (
 	"log"
 	"math/big"
 
-	"github.com/ethereum/go-ethereum/accounts/abi/bind"
+	"github.com/ethereum/go-ethereum/accounts/abi/bind/v2"
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/ethclient"
 	"github.com/tr1sm0s1n/qwik-gin-dapp/server/helpers"
@@ -33,22 +33,22 @@ func InfoService(client *ethclient.Client) (*big.Int, *big.Int, uint64) {
 	return networkID, chainID, latestBlock
 }
 
-func IssueService(client *ethclient.Client, instance *lib.Cert, newCertificate interfaces.InputCertificate) (*types.Transaction, error) {
+func IssueService(client *ethclient.Client, instance *bind.BoundContract, newCertificate interfaces.InputCertificate) (*types.Transaction, error) {
 	auth := middlewares.AuthGenerator(client)
 	intID, err := helpers.ParseInt(newCertificate.ID)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	trx, err := instance.Issue(auth, big.NewInt(int64(intID)), newCertificate.Name, newCertificate.Course, newCertificate.Grade, newCertificate.Date)
+	trx, err := bind.Transact(instance, auth, lib.NewCert().PackIssue(big.NewInt(int64(intID)), newCertificate.Name, newCertificate.Course, newCertificate.Grade, newCertificate.Date))
 
 	return trx, err
 }
 
-func FetchService(instance *lib.Cert, id int64) (interfaces.ReturnCertificate, error) {
-	opts := bind.CallOpts{}
+func FetchService(instance *bind.BoundContract, id int64) (lib.CertificatesOutput, error) {
 	certID := big.NewInt(id)
+	cert := lib.NewCert()
 
-	result, err := instance.Certificates(&opts, certID)
+	result, err := bind.Call(instance, nil, cert.PackCertificates(certID), cert.UnpackCertificates)
 	return result, err
 }
