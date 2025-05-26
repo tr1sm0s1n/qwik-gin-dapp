@@ -59,7 +59,7 @@ export const NavBar = component$(() => {
             >
               {connection.status ? (
                 <>
-                  <div class="h-6 w-6">
+                  <div class="h-6 w-6 mr-3">
                     <ImgMetamask />
                   </div>
                   <span>
@@ -70,7 +70,7 @@ export const NavBar = component$(() => {
               ) : (
                 <>
                   <span>Connect</span>
-                  <div class="h-6 w-6">
+                  <div class="h-6 w-6 ml-3">
                     <ImgMetamask />
                   </div>
                 </>
