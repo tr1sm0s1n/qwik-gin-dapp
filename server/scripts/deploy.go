@@ -18,14 +18,18 @@ import (
 	"github.com/tr1sm0s1n/qwik-gin-dapp/server/middlewares"
 )
 
+func init() {
+	if _, ok := os.LookupEnv("DOCKER"); !ok {
+		if err := godotenv.Load(); err != nil {
+			log.Fatal(err)
+		}
+	}
+}
+
 func main() {
 	var wg sync.WaitGroup
 	ch := make(chan int)
 	done := make(chan bool)
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatal(err)
-	}
 
 	client, err := ethclient.Dial(os.Getenv("RPC_URL"))
 	if err != nil {

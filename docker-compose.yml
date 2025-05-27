@@ -1,0 +1,40 @@
+services:
+  deployer:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    image: qwik-gin-dapp-server
+    container_name: qwik-gin-dapp-deployer
+    environment:
+      - DOCKER=true
+      - RPC_URL=${RPC_URL}
+      - PRIVATE_KEY=${PRIVATE_KEY}
+    entrypoint: ./app/deploy
+
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    container_name: qwik-gin-dapp-server
+    environment:
+      - DOCKER=true
+      - RPC_URL=${RPC_URL}
+      - PRIVATE_KEY=${PRIVATE_KEY}
+      - CONTRACT_ADDRESS=${CONTRACT_ADDRESS}
+    ports:
+      - 8080:8080
+    entrypoint: ./app/server
+
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+      args:
+        - API_URL=http://qwik-gin-dapp-server:8080
+        - ADMIN_SIGN=${ADMIN_SIGN}
+    container_name: qwik-gin-dapp-client
+    depends_on:
+      - server
+    ports:
+      - 3004:3004
+    command: 'pnpm run serve'

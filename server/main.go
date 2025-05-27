@@ -13,12 +13,15 @@ import (
 	"github.com/tr1sm0s1n/qwik-gin-dapp/server/lib"
 )
 
-func main() {
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatal(err)
+func init() {
+	if _, ok := os.LookupEnv("DOCKER"); !ok {
+		if err := godotenv.Load(); err != nil {
+			log.Fatal(err)
+		}
 	}
+}
 
+func main() {
 	contract := os.Getenv("CONTRACT_ADDRESS")
 	printContract := fmt.Sprintf("Contract: %s", contract)
 	fmt.Println(printContract)
@@ -41,5 +44,5 @@ func main() {
 	router.GET("/info", func(ctx *gin.Context) {
 		controllers.InfoController(ctx, client)
 	})
-	router.Run("localhost:8080")
+	router.Run(":8080")
 }
