@@ -1,21 +1,28 @@
+networks:
+  qg-dapp-network:
+    name: qg-dapp-network
+
 services:
   deployer:
     build:
       context: ./server
       dockerfile: Dockerfile
-    image: qwik-gin-dapp-server
-    container_name: qwik-gin-dapp-deployer
+    image: tr1sm0s1n/qg-dapp-server
+    container_name: qg-dapp-deployer
     environment:
       - DOCKER=true
       - RPC_URL=${RPC_URL}
       - PRIVATE_KEY=${PRIVATE_KEY}
     entrypoint: ./app/deploy
+    networks:
+      - qg-dapp-network
 
   server:
     build:
       context: ./server
       dockerfile: Dockerfile
-    container_name: qwik-gin-dapp-server
+    image: tr1sm0s1n/qg-dapp-server
+    container_name: qg-dapp-server
     environment:
       - DOCKER=true
       - RPC_URL=${RPC_URL}
@@ -24,17 +31,22 @@ services:
     ports:
       - 8080:8080
     entrypoint: ./app/server
+    networks:
+      - qg-dapp-network
 
   client:
     build:
       context: ./client
       dockerfile: Dockerfile
       args:
-        - API_URL=http://qwik-gin-dapp-server:8080
+        - API_URL=http://qg-dapp-server:8080
         - ADMIN_SIGN=${ADMIN_SIGN}
-    container_name: qwik-gin-dapp-client
+    image: tr1sm0s1n/qg-dapp-client
+    container_name: qg-dapp-client
     depends_on:
       - server
     ports:
       - 3004:3004
     command: 'pnpm run serve'
+    networks:
+      - qg-dapp-network
