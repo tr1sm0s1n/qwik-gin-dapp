@@ -49,7 +49,7 @@ Generate Go binding for contract:
 abigen --v2 --abi lib/Cert.json --bin lib/Cert.bin --pkg lib --type Cert --out lib/Cert.go
 ```
 
-Run a simulated blockchain on port **8545**, and add a private key to the '**.env**' file inside '**server**'.
+Run a simulated blockchain and add its JSON-RPC URL and a private key (with sufficient balance) to the '**.env**' file inside '**server**'.
 
 Deploy contract:
 
@@ -101,6 +101,28 @@ pnpm dev
 ```
 
 Click **Connect** to create a sign. Copy the sign to the '**.env**' file inside '**client**' and connect again.
+
+## 🐋 Run via Docker
+
+Deploy contract:
+
+```bash
+just deploy-d
+```
+
+Build and run (detached) the application containers:
+
+```bash
+just start
+```
+
+Stop the application containers:
+
+```bash
+just stop
+```
+
+**_Note_**: Docker uses '**.env**' file in the root. Update the file before the build.
 
 ## 📜 License
 
