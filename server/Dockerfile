@@ -1,4 +1,7 @@
-FROM golang:1.24.3-alpine AS builder
+FROM golang:1.24-alpine AS builder
+
+ENV GO_BUILDFLAGS="-trimpath -ldflags=-s -ldflags=-w"
+ENV CGO_ENABLED=0 GOOS=linux GOARCH=amd64
 
 WORKDIR /app
 
@@ -6,8 +9,8 @@ COPY go.mod go.sum ./
 RUN go mod download
 
 COPY ./ ./
-RUN go build scripts/deploy.go
-RUN go build -o server
+RUN go build $GO_BUILDFLAGS scripts/deploy.go && \
+    go build $GO_BUILDFLAGS -o server
 
 FROM alpine
 

@@ -1,4 +1,4 @@
-FROM node:22.16.0-alpine AS builder
+FROM node:22.17-alpine AS builder
 
 ARG API_URL
 ARG ADMIN_SIGN
