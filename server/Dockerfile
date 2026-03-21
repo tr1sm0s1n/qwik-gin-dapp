@@ -1,4 +1,4 @@
-FROM golang:1.24-alpine AS builder
+FROM golang:1.26-alpine AS builder
 
 ENV GO_BUILDFLAGS="-trimpath -ldflags=-s -ldflags=-w"
 ENV CGO_ENABLED=0 GOOS=linux GOARCH=amd64
