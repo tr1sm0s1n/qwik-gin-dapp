@@ -29,22 +29,22 @@
     "qwik": "qwik"
   },
   "devDependencies": {
-    "@builder.io/qwik": "^1.17.2",
-    "@builder.io/qwik-city": "^1.17.2",
+    "@builder.io/qwik": "^1.19.2",
+    "@builder.io/qwik-city": "^1.19.2",
     "@eslint/js": "latest",
-    "@types/node": "^24.10.1",
-    "eslint": "^9.39.1",
-    "eslint-plugin-qwik": "^1.17.2",
+    "@types/node": "^24.12.0",
+    "eslint": "^9.39.4",
+    "eslint-plugin-qwik": "^1.19.2",
     "globals": "^16.5.0",
-    "prettier": "^3.7.4",
+    "prettier": "^3.8.1",
     "typescript": "^5.9.3",
-    "typescript-eslint": "^8.48.1",
-    "undici": "^7.16.0",
+    "typescript-eslint": "^8.57.1",
+    "undici": "^7.24.5",
     "vite": "^5.4.21",
     "vite-tsconfig-paths": "^5.1.4"
   },
   "dependencies": {
-    "@tailwindcss/vite": "^4.1.17",
-    "tailwindcss": "^4.1.17"
+    "@tailwindcss/vite": "^4.2.2",
+    "tailwindcss": "^4.2.2"
   }
 }
